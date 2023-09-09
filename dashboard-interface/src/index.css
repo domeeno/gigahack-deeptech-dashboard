@@ -5,12 +5,3 @@
 html, body, #root, .h-full {
   height: 100%;
 }
-
-::-webkit-scrollbar {
-  width: 0.5em;
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: transparent; /* You can set the background color to match your container's background */
-}
-

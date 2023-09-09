@@ -43,6 +43,201 @@ const data = [
       }
     ]
   },
+  {
+    "id": 2,
+    "city": "City 321",
+    "store": "Store 5",
+    "brands": [
+      {
+        "id": 1,
+        "name": "Efes",
+        "products": [
+          {
+            "id": "1",
+            "name": "Product 1",
+          },
+          {
+            "id": "2",
+            "name": "Product 2",
+          },
+          {
+            "id": "3",
+            "name": "Product 3",
+          },
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Kozel",
+        "products": [
+          {
+            "id": "1",
+            "name": "Product 1",
+          },
+          {
+            "id": "2",
+            "name": "Product 2",
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "city": "City 321",
+    "store": "Store 5",
+    "brands": [
+      {
+        "id": 1,
+        "name": "Efes",
+        "products": [
+          {
+            "id": "1",
+            "name": "Product 1",
+          },
+          {
+            "id": "2",
+            "name": "Product 2",
+          },
+          {
+            "id": "3",
+            "name": "Product 3",
+          },
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Kozel",
+        "products": [
+          {
+            "id": "1",
+            "name": "Product 1",
+          },
+          {
+            "id": "2",
+            "name": "Product 2",
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "city": "City 321",
+    "store": "Store 5",
+    "brands": [
+      {
+        "id": 1,
+        "name": "Efes",
+        "products": [
+          {
+            "id": "1",
+            "name": "Product 1",
+          },
+          {
+            "id": "2",
+            "name": "Product 2",
+          },
+          {
+            "id": "3",
+            "name": "Product 3",
+          },
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Kozel",
+        "products": [
+          {
+            "id": "1",
+            "name": "Product 1",
+          },
+          {
+            "id": "2",
+            "name": "Product 2",
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "city": "City 321",
+    "store": "Store 5",
+    "brands": [
+      {
+        "id": 1,
+        "name": "Efes",
+        "products": [
+          {
+            "id": "1",
+            "name": "Product 1",
+          },
+          {
+            "id": "2",
+            "name": "Product 2",
+          },
+          {
+            "id": "3",
+            "name": "Product 3",
+          },
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Kozel",
+        "products": [
+          {
+            "id": "1",
+            "name": "Product 1",
+          },
+          {
+            "id": "2",
+            "name": "Product 2",
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "city": "City 321",
+    "store": "Store 5",
+    "brands": [
+      {
+        "id": 1,
+        "name": "Efes",
+        "products": [
+          {
+            "id": "1",
+            "name": "Product 1",
+          },
+          {
+            "id": "2",
+            "name": "Product 2",
+          },
+          {
+            "id": "3",
+            "name": "Product 3",
+          },
+        ]
+      },
+      {
+        "id": 2,
+        "name": "Kozel",
+        "products": [
+          {
+            "id": "1",
+            "name": "Product 1",
+          },
+          {
+            "id": "2",
+            "name": "Product 2",
+          }
+        ]
+      }
+    ]
+  },
 ]
 
 const Dashboard = () => {
@@ -52,8 +247,8 @@ const Dashboard = () => {
         <SidePanel />
         <div className="flex flex-col w-full h-full bg-clean shadow-inner">
           <Header />
-          <div className="flex-grow w-full items-center justify-center pt-14">
-            <div className="h-3/4 overflow-y-auto scrollbar-hide" >
+          <div className="flex-grow items-center justify-center mt-14">
+            <div className="overflow-y-auto" style={{height: "32rem"}}>
               {data.map((item, index) => {
                 return <Store key={index} data={item} />;
               })}
