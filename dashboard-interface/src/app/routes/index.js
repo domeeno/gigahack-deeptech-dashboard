@@ -12,7 +12,6 @@ const config = [
   }
 ]
 
-
 const RenderRoutes = () => {
   let routes = useRoutes(config)
   return routes
