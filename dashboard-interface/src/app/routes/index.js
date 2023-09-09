@@ -1,14 +1,14 @@
 import { useRoutes } from 'react-router-dom'
 
 import Dashboard from '../pages/Dashboard'
-import General from '../pages/General'
+import Map from '../pages/Map'
 
 const config = [
   {
     path: "/", element: <Dashboard />
   },
   {
-    path: "/general", element: <General />
+    path: "/map", element: <Map />
   }
 ]
 
