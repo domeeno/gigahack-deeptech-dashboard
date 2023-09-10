@@ -69,3 +69,55 @@ enum class PreferentialSegment(private val value: Int) {
     return value
   }
 }
+
+@Document
+data class Product (
+  @Id
+  val parentCode: Int,
+  val groupCode: Int,
+  val imported: Boolean,
+  val alcoGroup: Boolean,
+  val volume: String,
+  val packageType: PackageType,
+  val materialType: MaterialType,
+  val priceSegment: PriceSegment,
+)
+
+data class ProductDTO (
+  val parentCode: Int,
+  val groupCode: Int,
+  val imported: Boolean,
+  val alcoGroup: Boolean,
+  val volume: String,
+  val packageType: PackageType,
+  val materialType: MaterialType,
+  val priceSegment: PriceSegment,
+)
+
+enum class PriceSegment {
+  SEGMENT_1,
+  SEGMENT_2,
+  SEGMENT_3,
+  SEGMENT_4,
+  SEGMENT_5,
+  SEGMENT_6,
+}
+
+enum class MaterialType {
+  TYPE_1,
+  TYPE_12,
+  TYPE_16,
+  TYPE_17,
+  TYPE_18,
+  TYPE_19,
+  TYPE_20,
+  TYPE_21,
+  TYPE_22
+}
+
+enum class PackageType {
+  TYPE_1,
+  TYPE_2,
+  TYPE_3,
+  TYPE_4,
+}
