@@ -4,11 +4,15 @@ import com.gigahack.dashboard.model.Brand
 import com.gigahack.dashboard.model.Customer
 import com.gigahack.dashboard.model.Product
 import com.gigahack.dashboard.model.StoreData
+import com.gigahack.dashboard.model.Subproduct
 import com.gigahack.dashboard.model.UserSettings
 import com.gigahack.dashboard.model.UserSettingsDTO
 import com.gigahack.dashboard.repository.CustomerRepository
 import com.gigahack.dashboard.repository.DashboardRepository
 import com.gigahack.dashboard.repository.ProductRepository
+import org.springframework.data.mongodb.core.MongoTemplate
+import org.springframework.data.mongodb.core.query.Criteria
+import org.springframework.data.mongodb.core.query.Query
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -23,7 +27,8 @@ import kotlin.jvm.optionals.getOrDefault
 class DashboardController(
   private val dashboardRepository: DashboardRepository,
   private val customerRepository: CustomerRepository,
-  private val productRepository: ProductRepository
+  private val productRepository: ProductRepository,
+  private val mongoTemplate: MongoTemplate
 ) {
 
   @GetMapping("/stores")
@@ -49,7 +54,29 @@ class DashboardController(
     val settings = dashboardRepository.findById(333)
     val stores = customerRepository.findAllById(settings.get().customers)
 
-    val brands = productRepository.findAllByGroupCode(settings.get().brands)
+    val brands = findAllByGroupCode(settings.get().brands)
+
+    val uniqueBrands = brands.distinctBy { it.groupCode }
+
+    val additionalData = mutableListOf<Brand>()
+    uniqueBrands.forEach { product ->
+      additionalData.add(
+        Brand(
+          id = product.groupCode,
+          name = product.groupCode.toString(),
+          products = brands
+            .filter { it.groupCode == product.groupCode }
+            .map {
+              Subproduct(
+                id = it.parentCode,
+                name = it.parentCode.toString(),
+                volume = it.volume,
+                imported = it.imported
+              )
+            }
+        )
+      )
+    }
 
     return stores.map { customer ->
       StoreData(
@@ -57,13 +84,7 @@ class DashboardController(
         name = customer.name,
         region = customer.region,
         city = customer.city,
-        brands = brands.map { product ->
-          Brand(
-            id = product.parentCode,
-            name = product.parentCode.toString(),
-            products = emptyList()
-          )
-        }
+        brands = additionalData
       )
     }
   }
@@ -73,7 +94,7 @@ class DashboardController(
     val dashboardOptional = dashboardRepository.findById(333)
     val dashboard = dashboardOptional.get()
 
-    return if(dashboard.customers.contains(customerId)) {
+    return if (dashboard.customers.contains(customerId)) {
       "success"
     } else {
       dashboard.customers.add(0, customerId)
@@ -87,7 +108,7 @@ class DashboardController(
     val dashboardOptional = dashboardRepository.findById(333)
     val dashboard = dashboardOptional.get()
 
-    return if(dashboard.customers.contains(customerId)) {
+    return if (dashboard.customers.contains(customerId)) {
       dashboard.customers.remove(customerId)
       dashboardRepository.save(dashboard)
       "success"
@@ -97,7 +118,7 @@ class DashboardController(
   }
 
 
-//  @PostMapping("/settings")
+  //  @PostMapping("/settings")
   fun saveSettings(@RequestBody userSettingsDTO: UserSettingsDTO): String {
     return dashboardRepository.save(
       UserSettings(
@@ -106,5 +127,13 @@ class DashboardController(
         brands = userSettingsDTO.brands
       )
     ).id.toString()
+  }
+
+  private fun findAllByGroupCode(brands: List<Int>): List<Product> {
+    val query = Query()
+    query.addCriteria(
+      Criteria.where("groupCode").`in`(brands)
+    )
+    return mongoTemplate.find(query, Product::class.java)
   }
 }

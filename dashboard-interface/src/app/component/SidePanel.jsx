@@ -1,5 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom'
+import { AiFillLock } from 'react-icons/ai'
 
 const SidePanel = () => {
   const location = useLocation()
@@ -19,9 +20,12 @@ const SidePanel = () => {
           </div>
         </div>
         <div className='flex flex-row w-full justify-between items-center px-8'>
-          {isMap && <div className='w-2 h-2 bg-white rounded-full mr-2' />}
-          {!isMap && <div className='w-2 h-2 bg-dark-efes rounded-full mr-2' />}
-          <a href='/map' className={`py-4 ${isMap ? 'text-clean' : 'text-gray-400'}`}>Map</a>
+          {/* {isMap && <div className='w-2 h-2 bg-white rounded-full mr-2' />}
+          {!isMap && <div className='w-2 h-2 bg-dark-efes rounded-full mr-2' />} */}
+          <div>
+            <AiFillLock color='gray'/>
+          </div>
+          <h3 className={`cursor-not-allowed py-4 ${isMap ? 'text-clean' : 'text-gray-400'}`}>Map</h3>
         </div>
       </div>
     </div>

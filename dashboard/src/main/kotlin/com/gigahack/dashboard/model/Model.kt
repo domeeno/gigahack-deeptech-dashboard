@@ -156,4 +156,6 @@ data class Brand(
 data class Subproduct (
   val id: Int,
   val name: String,
+  val volume: String,
+  val imported: Boolean
 )

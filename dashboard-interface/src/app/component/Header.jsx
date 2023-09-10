@@ -103,7 +103,7 @@ const Header = () => {
         </div>
         <div className='py-2 my-2 mx-4 bg-white shadow-md rounded-lg'>
           <div className='flex flex-row items-center justify-center'>
-            <h3 className='pr-4 pl-2 text-gray-600'>Good Efes Guy</h3>
+            <h3 className='pr-4 pl-2 text-gray-600'>Good Efes SR</h3>
             <div className="flex justify-center items-center w-6 h-6 bg-gray-400 rounded-full mr-2">
               <GoPersonFill color='white' />
             </div>

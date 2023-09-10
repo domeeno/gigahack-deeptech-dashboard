@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MdLocationOn } from 'react-icons/md';
 import Graph from './Graph';
 import { RxCross2 } from "react-icons/rx";
+import { BiSolidPlaneLand } from "react-icons/bi";
 
 import { removeStoreFromDash } from '../service';
 
@@ -10,7 +11,7 @@ const BrandList = ({ brands, selectedBrandIndex, handleBrandClick }) => (
     {brands.map((brand, index) => (
       <li
         key={brand.id}
-        className={`text-sm mx-4 ${selectedBrandIndex === index ? 'text-blue-500' : 'text-gray-600'}`}
+        className={`text-sm cursor-pointer mx-4 ${selectedBrandIndex === index ? 'text-blue-500' : 'text-gray-600'}`}
         onClick={() => handleBrandClick(index)}
       >
         {brand.name}
@@ -24,10 +25,14 @@ const ProductList = ({ products, selectedProductIndex, handleProductClick }) => 
     {products.map((product, index) => (
       <li
         key={product.id}
-        className={`text-sm my-2 mx-4 ${selectedProductIndex === index ? 'text-blue-500' : 'text-gray-600'}`}
+        className={`text-sm cursor-pointer p-1 m-2 ${selectedProductIndex === index ? 'text-blue-500 shadow-efes shadow-inner rounded-lg' : 'text-gray-600'}`}
         onClick={() => handleProductClick(index, product.name)}
       >
-        {product.name}
+        <div className='flex flex-row items-center justify-between'>
+          <h4 className='ml-1'>{product.name.slice(-2)}</h4>
+          <span className='mx-2 text-xs text-gray-400'>{product.volume}L</span>
+          {product.imported ? <BiSolidPlaneLand className='mr-2 text-lg text-gray-400' /> : ''}
+        </div>
       </li>
     ))}
   </ul>
@@ -75,7 +80,7 @@ const Store = ({ data }) => {
           <RxCross2 color="#FFB1B1" size='2em' onClick={() => handleRemoveStore()} />
         </div>
       </div>
-      
+
       <div className=''>
         <Graph />
       </div>
