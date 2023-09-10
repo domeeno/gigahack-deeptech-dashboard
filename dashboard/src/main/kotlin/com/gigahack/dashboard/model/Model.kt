@@ -3,10 +3,11 @@ package com.gigahack.dashboard.model
 import org.springframework.data.annotation.Id
 import org.springframework.data.mongodb.core.mapping.Document
 
-@Document
-data class Customer (
+@Document("customer")
+data class Customer(
   @Id
   val id: Int,
+  val name: String,
   val volumeSegment: VolumeSegment,
   val city: String,
   val region: Region,
@@ -18,6 +19,7 @@ data class Customer (
 
 data class CustomerDTO (
   val id: Int,
+  val name: String,
   val volumeSegment: VolumeSegment,
   val city: String,
   val region: Region,
@@ -121,3 +123,11 @@ enum class PackageType {
   TYPE_3,
   TYPE_4,
 }
+
+@Document
+data class UserSettings (
+  @Id
+  val id: Int,
+  val customers: List<Int>,
+  val products: List<Int>,
+)

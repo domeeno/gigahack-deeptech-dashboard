@@ -7,7 +7,7 @@ const BrandList = ({ brands, selectedBrandIndex, handleBrandClick }) => (
     {brands.map((brand, index) => (
       <li
         key={brand.id}
-        className={`text-sm mx-2 ${selectedBrandIndex === index ? 'text-blue-500' : 'text-gray-600'}`}
+        className={`text-sm mx-4 ${selectedBrandIndex === index ? 'text-blue-500' : 'text-gray-600'}`}
         onClick={() => handleBrandClick(index)}
       >
         {brand.name}
@@ -21,7 +21,7 @@ const ProductList = ({ products, selectedProductIndex, handleProductClick }) => 
     {products.map((product, index) => (
       <li
         key={product.id}
-        className={`text-sm mx-2 ${selectedProductIndex === index ? 'text-blue-500' : 'text-gray-600'}`}
+        className={`text-sm my-2 mx-4 ${selectedProductIndex === index ? 'text-blue-500' : 'text-gray-600'}`}
         onClick={() => handleProductClick(index, product.name)}
       >
         {product.name}
