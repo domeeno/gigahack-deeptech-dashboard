@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      host: "localhost"
+      port: "27017"
+      database: "gigahack"
+      username: "admin"
+      password: "test"
+      authentication-database: "admin"
