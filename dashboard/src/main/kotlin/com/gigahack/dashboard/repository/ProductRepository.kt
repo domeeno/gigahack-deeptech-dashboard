@@ -4,4 +4,5 @@ import com.gigahack.dashboard.model.Product
 import org.springframework.data.mongodb.repository.MongoRepository
 
 interface ProductRepository: MongoRepository<Product, Int> {
+  fun findAllByGroupCode(groupCode: List<Int>): List<Product>
 }
