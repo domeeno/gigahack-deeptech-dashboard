@@ -128,6 +128,6 @@ enum class PackageType {
 data class UserSettings (
   @Id
   val id: Int,
-  val customers: List<Int>,
-  val products: List<Int>,
+  val customers: MutableList<Int>,
+  val products: MutableList<Int>,
 )

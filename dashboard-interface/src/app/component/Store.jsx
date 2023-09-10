@@ -52,7 +52,7 @@ const Store = ({ data }) => {
 
   return (
     <div className='flex flex-col bg-white m-4 rounded-lg shadow-lg'>
-      <div className='flex flex-row justify-end items-center'>
+      <div className='flex flex-row justify-end items-center m-4'>
         <div>
           <h2 className='text-gray-700 mx-2'>{data.city}, {data.store}</h2>
         </div>
