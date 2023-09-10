@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { MdLocationOn } from 'react-icons/md';
 import Graph from './Graph';
+import { RxCross2 } from "react-icons/rx";
+
+import { removeStoreFromDash } from '../service';
 
 const BrandList = ({ brands, selectedBrandIndex, handleBrandClick }) => (
   <ul className='flex flex-row items-center'>
@@ -40,9 +43,18 @@ const Store = ({ data }) => {
   };
 
   const handleProductClick = (index, productName) => {
-    console.log(`Making turbo giga chad request ${productName} ${data.store}`);
+    console.log(`Making turbo giga chad request ${productName} ${data.name}`);
     setSelectedProductIndex(index);
   };
+
+  const handleRemoveStore = () => {
+    removeStoreFromDash(data.id).then((data) => {
+      console.log(data);
+    }
+    )
+    // navigate to the dashboard
+    window.location.href = '/';
+  }
 
   useEffect(() => {
     if (selectedProductIndex === -1 && data.brands[selectedBrandIndex].products.length > 0) {
@@ -54,15 +66,18 @@ const Store = ({ data }) => {
     <div className='flex flex-col bg-white m-4 rounded-lg shadow-lg'>
       <div className='flex flex-row justify-end items-center m-4'>
         <div>
-          <h2 className='text-gray-700 mx-2'>{data.city}, {data.store}</h2>
+          <h2 className='text-gray-700 mx-2'>{data.region}, {data.city}, {data.name}</h2>
         </div>
         <div>
           <MdLocationOn color='#A3D8FF' size='2em' />
         </div>
+        <div className='cursor-pointer'>
+          <RxCross2 color="#FFB1B1" size='2em' onClick={() => handleRemoveStore()} />
+        </div>
       </div>
       
       <div className=''>
-        <Graph item={data.brands[selectedBrandIndex].products[selectedProductIndex]} />
+        <Graph />
       </div>
 
       <BrandList
@@ -72,7 +87,7 @@ const Store = ({ data }) => {
       />
 
       <ProductList
-        products={data.brands[selectedBrandIndex].products}
+        products={data.brands.length > 0 ? data.brands[selectedBrandIndex].products : []}
         selectedProductIndex={selectedProductIndex}
         handleProductClick={handleProductClick}
       />

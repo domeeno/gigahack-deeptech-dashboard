@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { GoPersonFill } from 'react-icons/go';
-import { getCustomers } from '../service';
+import { addCustomer, getCustomers } from '../service';
 import CustomerQuery from './CustomerQuery';
 
 const Header = () => {
@@ -81,8 +81,12 @@ const Header = () => {
     }, 1000);
   };
 
-  const handleCustomerClick = (customer) => {
-    console.log('Customer clicked:', customer);
+  const handleCustomerClick = (id) => {
+    addCustomer(id).then((data) => {
+      console.log(data);
+    })
+    // navigate to the dashboard
+    window.location.href = '/';
   };
 
   return (
@@ -120,7 +124,7 @@ const Header = () => {
             customers.map((customer, index) => {
               return (
                 <div className={index !== customers.length - 1 ? 'border-b border-gray-100' : ''}>
-                  <CustomerQuery customer={customer} handleClick={handleCustomerClick}/>
+                  <CustomerQuery customer={customer} handleClick={handleCustomerClick} />
                 </div>
               );
             })

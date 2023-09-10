@@ -124,10 +124,36 @@ enum class PackageType {
   TYPE_4,
 }
 
-@Document
+@Document("userSettings")
 data class UserSettings (
   @Id
   val id: Int,
   val customers: MutableList<Int>,
-  val products: MutableList<Int>,
+  val brands: MutableList<Int>,
+)
+
+data class UserSettingsDTO (
+  val id: Int,
+  val customers: MutableList<Int>,
+  val brands: MutableList<Int>,
+)
+
+data class StoreData (
+  val id: Int,
+  val city: String,
+  val name: String,
+  val region: Region,
+
+  val brands: List<Brand>
+)
+
+data class Brand(
+  val id: Int,
+  val name: String,
+  val products: List<Subproduct>
+)
+
+data class Subproduct (
+  val id: Int,
+  val name: String,
 )
